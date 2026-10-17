@@ -1,4 +1,4 @@
-﻿// e-workspace blog posts
+// e-workspace blog posts
 window.POSTS = [
   {
     id: "hello-e-workspace",

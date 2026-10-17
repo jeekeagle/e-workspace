@@ -1,4 +1,4 @@
-﻿// e-workspace blog app
+// e-workspace blog app
 // Hash-based routing so the static site behaves like a tiny SPA.
 
 (function () {
