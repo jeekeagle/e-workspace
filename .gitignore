@@ -1,0 +1,24 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Local
+.env
+.env.*
+!.env.example
+.ada-venv/
+__pycache__/
+*.pyc
+
+# Vercel
+.vercel/
+
+# Node (if you later add any tooling)
+node_modules/
+npm-debug.log*

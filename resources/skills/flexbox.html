@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CSS Flexbox 閫熸煡 路 Skills 路 e-workspace</title>
+  <meta name="description" content="Container + Item 涓ょ粍灞炴€с€備竴寮犺〃 + 浜斾釜甯歌甯冨眬 = 90% 鐨勯渶姹傘€? />
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%23fefdfa'/><text x='50%25' y='54%25' text-anchor='middle' font-family='Georgia,serif' font-size='38' fill='oklch(0.55 0.15 250)'>e</text></svg>" />
+  <link rel="stylesheet" href="../../assets/styles.css" />
+</head>
+<body>
+  <div class="paper-grain"></div>
+  <div class="shell layer">
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../">
+          <span class="brand__mark">e-workspace</span>
+          <span class="brand__dot">路</span>
+          <span class="brand__sub">jeekeagle</span>
+        </a>
+        <nav class="nav" aria-label="primary">
+          <a href="../../#/" data-view="home">Home</a>
+          <a href="../../#/posts" data-view="posts">Posts</a>
+          <a href="../" data-view="resources" class="is-active">Resources</a>
+          <a href="../../#/about" data-view="about">About</a>
+        </nav>
+      </div>
+    </header>
+    <main class="skill-page layer">
+      <p class="skill-page__crumbs">Resources / <a href="../">Skills</a> / SKILL 路 06</p>
+      <h1 class="skill-page__title">CSS Flexbox 閫熸煡</h1>
+      <p class="skill-page__lede">Container + Item 涓ょ粍灞炴€с€備竴寮犺〃 + 浜斾釜甯歌甯冨眬 = 90% 鐨勯渶姹傘€?/p>
+      <div class="tag-list">
+        <span>CSS</span>
+        <span>Flexbox</span>
+        <span>甯冨眬</span>
+      </div>
+      <section class="skill-section">
+        <h2>Container 灞炴€?/h2>
+        <pre><code>.container {
+  display: flex;          /* 鎴?inline-flex */
+  flex-direction: row;     /* row | row-reverse | column | column-reverse */
+  flex-wrap: wrap;         /* nowrap | wrap | wrap-reverse */
+  justify-content: center; /* 涓昏酱瀵归綈 */
+  align-items: center;     /* 浜ゅ弶杞村榻?*/
+  align-content: stretch;  /* 澶氳瀵归綈锛屼粎 wrap 鏃剁敓鏁?*/
+  gap: 16px;               /* 瀛愰」闂磋窛 */
+}</code></pre>
+        <table class="skill-table">
+          <thead><tr>
+            <th>灞炴€?/th>
+            <th>浣滅敤</th>
+            <th>甯哥敤鍊?/th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td><code>justify-content</code></td>
+              <td>涓昏酱鏂瑰悜鍒嗗竷</td>
+              <td>flex-start 路 center 路 flex-end 路 space-between 路 space-around 路 space-evenly</td>
+            </tr>
+            <tr>
+              <td><code>align-items</code></td>
+              <td>浜ゅ弶杞村榻愶紙姣忚锛?/td>
+              <td>stretch 路 center 路 flex-start 路 flex-end 路 baseline</td>
+            </tr>
+            <tr>
+              <td><code>flex-wrap</code></td>
+              <td>鏄惁鎹㈣</td>
+              <td>nowrap 路 wrap 路 wrap-reverse</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="skill-section">
+        <h2>Item 灞炴€?/h2>
+        <pre><code>.item {
+  flex-grow: 0;      /* 鍓╀綑绌洪棿鍒嗛厤姣斾緥 */
+  flex-shrink: 1;    /* 涓嶈冻绌洪棿鏀剁缉姣斾緥 */
+  flex-basis: auto;  /* 鍒濆灏哄 */
+  flex: 1;           /* grow:1 shrink:1 basis:0% */
+  align-self: auto;  /* 鍗曢」瑕嗙洊 align-items */
+  order: 0;          /* 閲嶆帓 */
+}</code></pre>
+        <div class="callout">
+          <strong>flex 绠€鍐?/strong>
+          &lt;code&gt;flex: 1&lt;/code&gt; = &lt;code&gt;flex: 1 1 0%&lt;/code&gt;锛屼笁涓瓙椤瑰啓 flex:1 灏辨槸缁忓吀&quot;绛夊&quot;甯冨眬銆?
+        </div>
+      </section>
+      <section class="skill-section">
+        <h2>浜斾釜甯歌甯冨眬</h2>
+        <h3>1. 姘村钩灞呬腑</h3>
+        <p>鐖跺厓绱?&lt;code&gt;display:flex; justify-content:center;&lt;/code&gt;銆?/p>
+        <h3>2. 鍨傜洿灞呬腑</h3>
+        <p>&lt;code&gt;display:flex; align-items:center; justify-content:center;&lt;/code&gt;銆?/p>
+        <h3>3. 涓ょ瀵归綈</h3>
+        <p>&lt;code&gt;display:flex; justify-content:space-between;&lt;/code&gt;銆?/p>
+        <h3>4. 绛夊鍒?/h3>
+        <p>姣忎釜 item 鍐?&lt;code&gt;flex:1&lt;/code&gt;銆?/p>
+        <h3>5. 搴曢儴瀵归綈鐨勮</h3>
+        <p>&lt;code&gt;display:flex; align-items:flex-end;&lt;/code&gt;銆?/p>
+      </section>
+      <section class="skill-section">
+        <h2>韪╁潙</h2>
+        <ul>
+          <li>蹇樿 <code>flex-wrap</code> 鏃跺瓙椤逛細婧㈠嚭鍘嬬缉灏哄锛屽鑷村唴瀹硅鎴柇銆?/li>
+          <li><code>flex:1</code> 瀛愰」鍐呯殑闀挎枃鏈笉鎹㈣涔熶細婧㈠嚭锛屽姞 <code>min-width:0</code> 鍙В銆?/li>
+          <li><code>margin: auto</code> 鍦?flex 涓粛鑳藉眳涓崟涓柟鍚戙€?/li>
+          <li>涓嶈鍦?flex 瀛愰」涓婂啓缁濆瀹氫綅鐨?height:100%鈥斺€旈珮搴﹂渶瑕佺埗绾ф樉寮忛珮搴︺€?/li>
+        </ul>
+      </section>
+      <nav class="skill-page__nav">
+        <a href="sql.html">
+          <p class="nav-hint">鈫?涓婁竴寮犻€熸煡</p>
+          <p class="nav-title">SQL 閫熸煡</p>
+        </a>
+        <a href="grid.html">
+          <p class="nav-hint">涓嬩竴寮犻€熸煡 鈫?/p>
+          <p class="nav-title">CSS Grid 閫熸煡</p>
+        </a>
+      </nav>
+    </main>
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <div>e-workspace 路 Skills 路 SKILL 路 06</div>
+        <div>
+          <a href="../">鈫?Skills 绱㈠紩</a>
+          路
+          <a href="https://github.com/jeekeagle/e-workspace" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

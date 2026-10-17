@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Git 鍛戒护閫熸煡 路 Skills 路 e-workspace</title>
+  <meta name="description" content="鎸?quot;鏃ュ父 / 鍗忎綔 / 鏁戞€?quot;涓夌粍缁勭粐銆傚鍒剁矘璐村嵆鍙簲瀵?90% 鐨勫伐浣滄祦銆? />
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%23fefdfa'/><text x='50%25' y='54%25' text-anchor='middle' font-family='Georgia,serif' font-size='38' fill='oklch(0.55 0.15 250)'>e</text></svg>" />
+  <link rel="stylesheet" href="../../assets/styles.css" />
+</head>
+<body>
+  <div class="paper-grain"></div>
+  <div class="shell layer">
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../">
+          <span class="brand__mark">e-workspace</span>
+          <span class="brand__dot">路</span>
+          <span class="brand__sub">jeekeagle</span>
+        </a>
+        <nav class="nav" aria-label="primary">
+          <a href="../../#/" data-view="home">Home</a>
+          <a href="../../#/posts" data-view="posts">Posts</a>
+          <a href="../" data-view="resources" class="is-active">Resources</a>
+          <a href="../../#/about" data-view="about">About</a>
+        </nav>
+      </div>
+    </header>
+    <main class="skill-page layer">
+      <p class="skill-page__crumbs">Resources / <a href="../">Skills</a> / SKILL 路 02</p>
+      <h1 class="skill-page__title">Git 鍛戒护閫熸煡</h1>
+      <p class="skill-page__lede">鎸?quot;鏃ュ父 / 鍗忎綔 / 鏁戞€?quot;涓夌粍缁勭粐銆傚鍒剁矘璐村嵆鍙簲瀵?90% 鐨勫伐浣滄祦銆?/p>
+      <div class="tag-list">
+        <span>鐗堟湰鎺у埗</span>
+        <span>閫熸煡</span>
+        <span>鍛戒护琛?/span>
+      </div>
+      <section class="skill-section">
+        <h2>鍒濆鍖栦笌閰嶇疆</h2>
+        <pre><code># 棣栨閰嶇疆
+git config --global user.name &quot;Your Name&quot;
+git config --global user.email &quot;you@example.com&quot;
+git config --global init.defaultBranch main
+
+# 鍏嬮殕涓庢柊寤?
+git clone git@github.com:user/repo.git
+cd repo
+git init</code></pre>
+      </section>
+      <section class="skill-section">
+        <h2>鏃ュ父鎿嶄綔</h2>
+        <table class="skill-table">
+          <thead><tr>
+            <th>鍦烘櫙</th>
+            <th>鍛戒护</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td>鏌ョ湅鐘舵€?/td>
+              <td><code>git status</code></td>
+            </tr>
+            <tr>
+              <td>鏆傚瓨鍏ㄩ儴</td>
+              <td><code>git add -A</code></td>
+            </tr>
+            <tr>
+              <td>鏆傚瓨鍗曚釜鏂囦欢</td>
+              <td><code>git add path/to/file</code></td>
+            </tr>
+            <tr>
+              <td>鎻愪氦</td>
+              <td><code>git commit -m "msg"</code></td>
+            </tr>
+            <tr>
+              <td>鎺ㄩ€?/td>
+              <td><code>git push</code></td>
+            </tr>
+            <tr>
+              <td>鎷夊彇骞跺悎骞?/td>
+              <td><code>git pull --rebase</code></td>
+            </tr>
+            <tr>
+              <td>鏌ョ湅鏃ュ織</td>
+              <td><code>git log --oneline --graph</code></td>
+            </tr>
+            <tr>
+              <td>鏌ョ湅鍙樻洿</td>
+              <td><code>git diff</code></td>
+            </tr>
+            <tr>
+              <td>鏌ョ湅鏌愭鎻愪氦</td>
+              <td><code>git show <sha></code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="skill-section">
+        <h2>鍒嗘敮</h2>
+        <pre><code>git branch                  # 鍒楀嚭鏈湴鍒嗘敮
+git branch -a               # 鍒楀嚭鎵€鏈夊垎鏀紙鍚繙绋嬶級
+git switch -c feature/x     # 鍒涘缓骞跺垏鎹?
+git switch main             # 鍒囨崲鍥?main
+git branch -d feature/x     # 鍒犻櫎锛堝凡鍚堝苟锛?
+git branch -D feature/x     # 寮哄埗鍒犻櫎锛堟湭鍚堝苟锛?
+git push -u origin feature/x   # 棣栨鎺ㄩ€佸苟璁剧疆涓婃父</code></pre>
+      </section>
+      <section class="skill-section">
+        <h2>鎾ら攢涓庡洖婊?/h2>
+        <div class="callout">
+          <strong>鍒嗘竻涓変釜鍖?/strong>
+          宸ヤ綔鍖猴紙Working锛夈€佹殏瀛樺尯锛圛ndex / Staged锛夈€佺増鏈簱锛圧epo锛夈€傛挙閿€鍔ㄤ綔瑕佹竻妤氳嚜宸卞仠鍦ㄥ摢涓尯銆?
+        </div>
+        <table class="skill-table">
+          <thead><tr>
+            <th>鎯冲仛鐨勪簨</th>
+            <th>鍛戒护</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td>涓㈠純宸ヤ綔鍖轰慨鏀?/td>
+              <td><code>git checkout -- file</code></td>
+            </tr>
+            <tr>
+              <td>鍙栨秷鏆傚瓨</td>
+              <td><code>git restore --staged file</code></td>
+            </tr>
+            <tr>
+              <td>鏀瑰啓鏈€杩戜竴娆℃彁浜?/td>
+              <td><code>git commit --amend</code></td>
+            </tr>
+            <tr>
+              <td>鍥炴粴鍒版煇娆℃彁浜わ紙淇濈暀鏀瑰姩锛?/td>
+              <td><code>git reset <sha></code></td>
+            </tr>
+            <tr>
+              <td>鍥炴粴鍒版煇娆℃彁浜わ紙涓嶇暀鐥曪級</td>
+              <td><code>git revert <sha></code></td>
+            </tr>
+            <tr>
+              <td>鍥炲埌涓婁竴涓垎鏀?/td>
+              <td><code>git switch -</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="skill-section">
+        <h2>Stash锛氫复鏃朵繚瀛?/h2>
+        <pre><code>git stash push -m &quot;wip&quot;   # 淇濆瓨褰撳墠淇敼
+git stash list              # 鏌ョ湅
+git stash pop               # 鎭㈠鏈€杩戜竴娆?
+git stash apply stash@{1}   # 鎭㈠鎸囧畾涓€鏉?/code></pre>
+      </section>
+      <section class="skill-section">
+        <h2>Rebase 涓庝氦浜掑紡鏀瑰啓</h2>
+        <p>Rebase = 鎶婂綋鍓嶅垎鏀殑鎻愪氦&quot;閲嶆斁&quot;鍒扮洰鏍囧垎鏀箣涓娿€傝兘璁╁巻鍙插彉鎴愮洿绾匡紝浣嗕細鏀瑰啓鎻愪氦鍝堝笇锛屽叕鍏卞垎鏀厧鐢ㄣ€?/p>
+        <pre><code># 鎶婂綋鍓嶅垎鏀?rebase 鍒?main
+git fetch origin
+git rebase origin/main
+
+# 鏀瑰啓鏈€杩?5 娆℃彁浜わ紙鍚堝苟 / 鏀规枃妗?/ 鍒犳彁浜わ級
+git rebase -i HEAD~5</code></pre>
+        <div class="callout">
+          <strong>鍐茬獊鎬庝箞鍔?/strong>
+          rebase 鍑虹幇鍐茬獊锛氱紪杈戞枃浠?鈫?git add 鈫?git rebase --continue銆傛斁寮冨垯 git rebase --abort銆?
+        </div>
+      </section>
+      <section class="skill-section">
+        <h2>杩滅▼涓庡悓姝?/h2>
+        <pre><code>git remote -v                          # 鏌ョ湅杩滅▼
+git remote add origin git@github.com:user/repo.git
+git fetch --all --prune                # 鎷夊彇骞舵竻鐞嗗凡鍒犻櫎杩滅▼鍒嗘敮
+git push --force-with-lease            # 瀹夊叏寮烘帹锛堟嫆缁濊瑕嗙洊锛?/code></pre>
+      </section>
+      <nav class="skill-page__nav">
+        <a href="markdown.html">
+          <p class="nav-hint">鈫?涓婁竴寮犻€熸煡</p>
+          <p class="nav-title">Markdown 閫熸煡</p>
+        </a>
+        <a href="http-status.html">
+          <p class="nav-hint">涓嬩竴寮犻€熸煡 鈫?/p>
+          <p class="nav-title">HTTP 鐘舵€佺爜閫熸煡</p>
+        </a>
+      </nav>
+    </main>
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <div>e-workspace 路 Skills 路 SKILL 路 02</div>
+        <div>
+          <a href="../">鈫?Skills 绱㈠紩</a>
+          路
+          <a href="https://github.com/jeekeagle/e-workspace" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,231 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Unix 鍛戒护琛岄€熸煡 路 Skills 路 e-workspace</title>
+  <meta name="description" content="绠￠亾銆侀噸瀹氬悜銆佹煡鎵俱€佹枃鏈鐞嗏€斺€旀棩甯镐細鐢ㄤ笂鐨?30 涓懡浠ゃ€? />
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%23fefdfa'/><text x='50%25' y='54%25' text-anchor='middle' font-family='Georgia,serif' font-size='38' fill='oklch(0.55 0.15 250)'>e</text></svg>" />
+  <link rel="stylesheet" href="../../assets/styles.css" />
+</head>
+<body>
+  <div class="paper-grain"></div>
+  <div class="shell layer">
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../">
+          <span class="brand__mark">e-workspace</span>
+          <span class="brand__dot">路</span>
+          <span class="brand__sub">jeekeagle</span>
+        </a>
+        <nav class="nav" aria-label="primary">
+          <a href="../../#/" data-view="home">Home</a>
+          <a href="../../#/posts" data-view="posts">Posts</a>
+          <a href="../" data-view="resources" class="is-active">Resources</a>
+          <a href="../../#/about" data-view="about">About</a>
+        </nav>
+      </div>
+    </header>
+    <main class="skill-page layer">
+      <p class="skill-page__crumbs">Resources / <a href="../">Skills</a> / SKILL 路 11</p>
+      <h1 class="skill-page__title">Unix 鍛戒护琛岄€熸煡</h1>
+      <p class="skill-page__lede">绠￠亾銆侀噸瀹氬悜銆佹煡鎵俱€佹枃鏈鐞嗏€斺€旀棩甯镐細鐢ㄤ笂鐨?30 涓懡浠ゃ€?/p>
+      <div class="tag-list">
+        <span>Unix</span>
+        <span>Shell</span>
+        <span>閫熸煡</span>
+      </div>
+      <section class="skill-section">
+        <h2>鏂囦欢涓庣洰褰?/h2>
+        <table class="skill-table">
+          <thead><tr>
+            <th>鍛戒护</th>
+            <th>鐢ㄩ€?/th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td><code>pwd</code></td>
+              <td>褰撳墠鐩綍</td>
+            </tr>
+            <tr>
+              <td><code>ls -lah</code></td>
+              <td>璇︾粏淇℃伅 + 闅愯棌鏂囦欢 + 浜虹被鍙澶у皬</td>
+            </tr>
+            <tr>
+              <td><code>cd -</code></td>
+              <td>鍥炲埌涓婁竴涓洰褰?/td>
+            </tr>
+            <tr>
+              <td><code>mkdir -p a/b/c</code></td>
+              <td>閫掑綊鍒涘缓</td>
+            </tr>
+            <tr>
+              <td><code>rm -rf dir</code></td>
+              <td>閫掑綊鍒犻櫎锛堣皑鎱庯級</td>
+            </tr>
+            <tr>
+              <td><code>cp -r src dst</code></td>
+              <td>閫掑綊澶嶅埗</td>
+            </tr>
+            <tr>
+              <td><code>mv a b</code></td>
+              <td>閲嶅懡鍚?/ 绉诲姩</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="skill-section">
+        <h2>鏌ョ湅鍐呭</h2>
+        <table class="skill-table">
+          <thead><tr>
+            <th>鍛戒护</th>
+            <th>鐢ㄩ€?/th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td><code>cat</code></td>
+              <td>鎵撳嵃鍏ㄦ枃</td>
+            </tr>
+            <tr>
+              <td><code>less</code></td>
+              <td>鍙粴鍔ㄦ煡鐪嬶紙q 閫€鍑猴紝/ 鎼滅储锛?/td>
+            </tr>
+            <tr>
+              <td><code>head -n 20</code></td>
+              <td>鍓?20 琛?/td>
+            </tr>
+            <tr>
+              <td><code>tail -f</code></td>
+              <td>鎸佺画杩借釜灏鹃儴</td>
+            </tr>
+            <tr>
+              <td><code>wc -l</code></td>
+              <td>琛屾暟</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="skill-section">
+        <h2>绠￠亾涓庨噸瀹氬悜</h2>
+        <pre><code>cmd &gt; file      # 鏍囧噯杈撳嚭鍒版枃浠讹紙瑕嗙洊锛?
+cmd &gt;&gt; file     # 杩藉姞
+cmd 2&gt; err.log  # 鏍囧噯閿欒鍒版枃浠?
+cmd &lt; input     # 浠庢枃浠惰
+cmd1 | cmd2     # 绠￠亾
+
+# 鍚屾椂鎷?stdout 涓?stderr
+cmd &gt; out.log 2&gt;&amp;1
+
+# tee锛氬睆骞?+ 鏂囦欢
+cmd | tee out.log</code></pre>
+      </section>
+      <section class="skill-section">
+        <h2>鏌ユ壘</h2>
+        <table class="skill-table">
+          <thead><tr>
+            <th>鍛戒护</th>
+            <th>鐢ㄩ€?/th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td><code>find . -name '*.ts'</code></td>
+              <td>鎸夋枃浠跺悕</td>
+            </tr>
+            <tr>
+              <td><code>find . -size +10M</code></td>
+              <td>鎸夊ぇ灏?/td>
+            </tr>
+            <tr>
+              <td><code>find . -mtime -7</code></td>
+              <td>杩?7 澶╀慨鏀?/td>
+            </tr>
+            <tr>
+              <td><code>grep -rn 'TODO' .</code></td>
+              <td>鏂囨湰鎼滅储锛堥€掑綊 + 琛屽彿锛?/td>
+            </tr>
+            <tr>
+              <td><code>grep -E 'a|b'</code></td>
+              <td>鎵╁睍姝ｅ垯</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="skill-section">
+        <h2>鏂囨湰澶勭悊</h2>
+        <pre><code># awk锛氭寜鍒楀鐞?
+awk -F, &#x27;{print $1, $3}&#x27; data.csv
+
+# sed锛氭浛鎹?
+sed -i &#x27;&#x27; &#x27;s/foo/bar/g&#x27; file.txt   # macOS
+sed -i &#x27;s/foo/bar/g&#x27; file.txt      # Linux
+
+# xargs锛氭妸 stdin 杞弬鏁?
+find . -name &#x27;*.log&#x27; | xargs rm
+
+# sort / uniq / cut
+sort | uniq -c | sort -nr | head
+cut -d, -f2 data.csv</code></pre>
+      </section>
+      <section class="skill-section">
+        <h2>杩涚▼涓庣綉缁?/h2>
+        <table class="skill-table">
+          <thead><tr>
+            <th>鍛戒护</th>
+            <th>鐢ㄩ€?/th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td><code>ps aux | grep node</code></td>
+              <td>鏌ョ湅杩涚▼</td>
+            </tr>
+            <tr>
+              <td><code>kill -9 PID</code></td>
+              <td>寮烘潃</td>
+            </tr>
+            <tr>
+              <td><code>top / htop</code></td>
+              <td>瀹炴椂鍗犵敤</td>
+            </tr>
+            <tr>
+              <td><code>curl -I url</code></td>
+              <td>鍙湅鍝嶅簲澶?/td>
+            </tr>
+            <tr>
+              <td><code>curl -X POST -d @file url</code></td>
+              <td>POST 鏁版嵁</td>
+            </tr>
+            <tr>
+              <td><code>ssh user@host</code></td>
+              <td>杩滅▼鐧诲綍</td>
+            </tr>
+            <tr>
+              <td><code>scp file user@host:/path</code></td>
+              <td>澶嶅埗</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <nav class="skill-page__nav">
+        <a href="prompt-engineering.html">
+          <p class="nav-hint">鈫?涓婁竴寮犻€熸煡</p>
+          <p class="nav-title">Prompt 宸ョ▼鍩虹閫熸煡</p>
+        </a>
+        <a href="docker.html">
+          <p class="nav-hint">涓嬩竴寮犻€熸煡 鈫?/p>
+          <p class="nav-title">Docker 閫熼€氶€熸煡</p>
+        </a>
+      </nav>
+    </main>
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <div>e-workspace 路 Skills 路 SKILL 路 11</div>
+        <div>
+          <a href="../">鈫?Skills 绱㈠紩</a>
+          路
+          <a href="https://github.com/jeekeagle/e-workspace" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

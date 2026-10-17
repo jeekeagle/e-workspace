@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resources · e-workspace</title>
+  <meta name="description" content="e-workspace 的 Resources 索引：Skills 速查、笔记与工具。" />
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%23fefdfa'/><text x='50%25' y='54%25' text-anchor='middle' font-family='Georgia,serif' font-size='38' fill='oklch(0.55 0.15 250)'>e</text></svg>" />
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="paper-grain"></div>
+  <div class="shell layer">
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="brand" href="../">
+          <span class="brand__mark">e-workspace</span>
+          <span class="brand__dot">·</span>
+          <span class="brand__sub">jeekeagle</span>
+        </a>
+        <nav class="nav" aria-label="primary">
+          <a href="../#/" data-view="home">Home</a>
+          <a href="../#/posts" data-view="posts">Posts</a>
+          <a href="./" data-view="resources" class="is-active">Resources</a>
+          <a href="../#/about" data-view="about">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container layer">
+      <section class="hero fade-up">
+        <p class="hero__eyebrow">Resources</p>
+        <h1 class="hero__title">把工具拆成<em>能直接打开的卡片</em></h1>
+        <p class="hero__lede">Resources 是 e-workspace 的索引页。每个子目录都是一组独立的 HTML，点开就是它的速查或笔记。</p>
+      </section>
+
+      <section class="section">
+        <div class="section__head">
+          <h2 class="section__title">分类</h2>
+          <span class="section__hint">2 个子模块</span>
+        </div>
+        <div class="cards">
+          <a class="card" href="skills/">
+            <div class="card__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13l2 2 4-4"/></svg>
+            </div>
+            <div class="card__hint">cheatsheets · 12</div>
+            <h3 class="card__title">Skills</h3>
+            <p class="card__desc">一组独立 HTML 的速查合集。每张卡片点开就是一个完整的速查页，可离线保存、复制、转发。</p>
+            <span class="card__count">→ 打开 /skills</span>
+          </a>
+          <a class="card" href="notes/">
+            <div class="card__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h12l4 4v12a2 2 0 0 1-2 2H4z"/><path d="M16 4v4h4"/><path d="M8 12h8"/><path d="M8 16h6"/></svg>
+            </div>
+            <div class="card__hint">notes · 1</div>
+            <h3 class="card__title">Notes</h3>
+            <p class="card__desc">一些没那么成型的思考与备忘。结构比 Skills 自由，更像草稿纸。</p>
+            <span class="card__count">→ 打开 /notes</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <div>e-workspace · Resources</div>
+        <div>
+          <a href="../">← 回首页</a>
+          ·
+          <a href="https://github.com/jeekeagle/e-workspace" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

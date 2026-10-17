@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SQL 閫熸煡 路 Skills 路 e-workspace</title>
+  <meta name="description" content="瑕嗙洊 SELECT銆丣OIN銆佽仛鍚堛€佺獥鍙ｅ嚱鏁般€傝娉曚互 PostgreSQL 涓哄噯锛屽樊寮傚浼氭敞鏄庛€? />
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%23fefdfa'/><text x='50%25' y='54%25' text-anchor='middle' font-family='Georgia,serif' font-size='38' fill='oklch(0.55 0.15 250)'>e</text></svg>" />
+  <link rel="stylesheet" href="../../assets/styles.css" />
+</head>
+<body>
+  <div class="paper-grain"></div>
+  <div class="shell layer">
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../">
+          <span class="brand__mark">e-workspace</span>
+          <span class="brand__dot">路</span>
+          <span class="brand__sub">jeekeagle</span>
+        </a>
+        <nav class="nav" aria-label="primary">
+          <a href="../../#/" data-view="home">Home</a>
+          <a href="../../#/posts" data-view="posts">Posts</a>
+          <a href="../" data-view="resources" class="is-active">Resources</a>
+          <a href="../../#/about" data-view="about">About</a>
+        </nav>
+      </div>
+    </header>
+    <main class="skill-page layer">
+      <p class="skill-page__crumbs">Resources / <a href="../">Skills</a> / SKILL 路 05</p>
+      <h1 class="skill-page__title">SQL 閫熸煡</h1>
+      <p class="skill-page__lede">瑕嗙洊 SELECT銆丣OIN銆佽仛鍚堛€佺獥鍙ｅ嚱鏁般€傝娉曚互 PostgreSQL 涓哄噯锛屽樊寮傚浼氭敞鏄庛€?/p>
+      <div class="tag-list">
+        <span>SQL</span>
+        <span>鏁版嵁搴?/span>
+        <span>閫熸煡</span>
+      </div>
+      <section class="skill-section">
+        <h2>鏌ヨ鍩虹</h2>
+        <pre><code>SELECT col1, col2, COUNT(*)
+FROM orders
+WHERE status = &#x27;paid&#x27;
+  AND created_at &gt;= &#x27;2026-01-01&#x27;
+GROUP BY col1, col2
+HAVING COUNT(*) &gt; 5
+ORDER BY created_at DESC
+LIMIT 50;</code></pre>
+      </section>
+      <section class="skill-section">
+        <h2>JOIN 绫诲瀷</h2>
+        <table class="skill-table">
+          <thead><tr>
+            <th>绫诲瀷</th>
+            <th>琛屼负</th>
+            <th>浣曟椂鐢?/th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td>INNER JOIN</td>
+              <td>鍙繚鐣欎袱杈归兘鍖归厤鐨勮</td>
+              <td>榛樿閫夋嫨锛屾渶甯哥敤</td>
+            </tr>
+            <tr>
+              <td>LEFT JOIN</td>
+              <td>淇濈暀宸﹁〃鍏ㄩ儴锛屽彸琛ㄨˉ NULL</td>
+              <td>瑕佸垪鍑哄乏琛ㄥ叏闆?/td>
+            </tr>
+            <tr>
+              <td>RIGHT JOIN</td>
+              <td>淇濈暀鍙宠〃鍏ㄩ儴锛屽乏琛ㄨˉ NULL</td>
+              <td>灏戣锛屽彲鐢?LEFT 鏀瑰啓</td>
+            </tr>
+            <tr>
+              <td>FULL JOIN</td>
+              <td>涓よ竟閮戒繚鐣?/td>
+              <td>瀵圭О琛ラ泦鍦烘櫙</td>
+            </tr>
+            <tr>
+              <td>CROSS JOIN</td>
+              <td>绗涘崱灏旂Н</td>
+              <td>鏋氫妇缁勫悎 / 鐢熸垚搴忓垪</td>
+            </tr>
+          </tbody>
+        </table>
+        <pre><code>SELECT u.name, COUNT(o.id) AS order_count
+FROM users u
+LEFT JOIN orders o ON o.user_id = u.id
+GROUP BY u.id
+ORDER BY order_count DESC;</code></pre>
+      </section>
+      <section class="skill-section">
+        <h2>鑱氬悎涓庤繃婊?/h2>
+        <p>WHERE 鍦ㄥ垎缁勫墠杩囨护锛汬AVING 鍦ㄥ垎缁勫悗杩囨护銆傝仛鍚堝嚱鏁?NULL 涓嶈鍏ャ€?/p>
+        <table class="skill-table">
+          <thead><tr>
+            <th>鍑芥暟</th>
+            <th>鐢ㄩ€?/th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td><code>COUNT(*)</code></td>
+              <td>琛屾暟</td>
+            </tr>
+            <tr>
+              <td><code>SUM / AVG</code></td>
+              <td>鎬诲拰 / 骞冲潎</td>
+            </tr>
+            <tr>
+              <td><code>MIN / MAX</code></td>
+              <td>鏈€灏?/ 鏈€澶?/td>
+            </tr>
+            <tr>
+              <td><code>ARRAY_AGG</code></td>
+              <td>鎸夌粍鑱氬悎鎴愭暟缁?/td>
+            </tr>
+            <tr>
+              <td><code>STRING_AGG</code></td>
+              <td>鑱氬悎鎴愬瓧绗︿覆</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="skill-section">
+        <h2>绐楀彛鍑芥暟</h2>
+        <p>绐楀彛鍑芥暟鍦ㄤ笉鍚堝苟琛岀殑鍓嶆彁涓嬪仛&quot;缁勫唴璁＄畻&quot;銆?/p>
+        <pre><code>SELECT
+  user_id,
+  created_at,
+  amount,
+  SUM(amount) OVER (PARTITION BY user_id ORDER BY created_at) AS running_total,
+  ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY created_at) AS seq
+FROM orders;</code></pre>
+        <table class="skill-table">
+          <thead><tr>
+            <th>鍑芥暟</th>
+            <th>鐢ㄩ€?/th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td><code>ROW_NUMBER()</code></td>
+              <td>1, 2, 3 鈥?鏃犲苟鍒?/td>
+            </tr>
+            <tr>
+              <td><code>RANK()</code></td>
+              <td>骞跺垪璺冲彿锛?, 1, 3</td>
+            </tr>
+            <tr>
+              <td><code>DENSE_RANK()</code></td>
+              <td>骞跺垪涓嶈烦鍙凤細1, 1, 2</td>
+            </tr>
+            <tr>
+              <td><code>LAG / LEAD</code></td>
+              <td>鍓?/ 鍚庝竴琛?/td>
+            </tr>
+            <tr>
+              <td><code>FIRST_VALUE</code></td>
+              <td>鍒嗙粍棣栬</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="skill-section">
+        <h2>CTE 涓庡瓙鏌ヨ</h2>
+        <pre><code>WITH active_users AS (
+  SELECT id FROM users WHERE last_seen &gt;= NOW() - INTERVAL &#x27;7 days&#x27;
+)
+SELECT COUNT(*) FROM active_users;
+
+-- 閫掑綊 CTE锛氱粍缁囨爲 / 璺緞灞曞紑
+WITH RECURSIVE org_tree AS (
+  SELECT id, parent_id, name FROM teams WHERE parent_id IS NULL
+  UNION ALL
+  SELECT t.id, t.parent_id, t.name FROM teams t
+  JOIN org_tree o ON t.parent_id = o.id
+)
+SELECT * FROM org_tree;</code></pre>
+      </section>
+      <section class="skill-section">
+        <h2>甯哥敤鎶€宸?/h2>
+        <ul>
+          <li><code>EXPLAIN</code> / <code>EXPLAIN ANALYZE</code> 鐪嬫墽琛岃鍒?/li>
+          <li>鍠勭敤瑕嗙洊绱㈠紩锛?code>CREATE INDEX idx_o_user ON orders(user_id, created_at DESC)</code></li>
+          <li>閬垮厤鍦?WHERE 閲屽鍒楀仛鍑芥暟杩愮畻锛屽惁鍒欑储寮曞け鏁?/li>
+          <li><code>DISTINCT</code> 鏄殣钘忕殑鎺掑簭锛岃兘鐢?GROUP BY 鏇夸唬灏辨浛浠?/li>
+        </ul>
+      </section>
+      <nav class="skill-page__nav">
+        <a href="regex.html">
+          <p class="nav-hint">鈫?涓婁竴寮犻€熸煡</p>
+          <p class="nav-title">姝ｅ垯琛ㄨ揪寮忛€熸煡</p>
+        </a>
+        <a href="flexbox.html">
+          <p class="nav-hint">涓嬩竴寮犻€熸煡 鈫?/p>
+          <p class="nav-title">CSS Flexbox 閫熸煡</p>
+        </a>
+      </nav>
+    </main>
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <div>e-workspace 路 Skills 路 SKILL 路 05</div>
+        <div>
+          <a href="../">鈫?Skills 绱㈠紩</a>
+          路
+          <a href="https://github.com/jeekeagle/e-workspace" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

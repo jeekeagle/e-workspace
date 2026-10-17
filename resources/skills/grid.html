@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CSS Grid 閫熸煡 路 Skills 路 e-workspace</title>
+  <meta name="description" content="浠庝竴琛岀殑鍗＄墖鍒版暣椤靛竷灞€銆侴rid 姣?Flex 鏇存搮闀?quot;浜岀淮&quot;銆? />
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%23fefdfa'/><text x='50%25' y='54%25' text-anchor='middle' font-family='Georgia,serif' font-size='38' fill='oklch(0.55 0.15 250)'>e</text></svg>" />
+  <link rel="stylesheet" href="../../assets/styles.css" />
+</head>
+<body>
+  <div class="paper-grain"></div>
+  <div class="shell layer">
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="brand" href="../../">
+          <span class="brand__mark">e-workspace</span>
+          <span class="brand__dot">路</span>
+          <span class="brand__sub">jeekeagle</span>
+        </a>
+        <nav class="nav" aria-label="primary">
+          <a href="../../#/" data-view="home">Home</a>
+          <a href="../../#/posts" data-view="posts">Posts</a>
+          <a href="../" data-view="resources" class="is-active">Resources</a>
+          <a href="../../#/about" data-view="about">About</a>
+        </nav>
+      </div>
+    </header>
+    <main class="skill-page layer">
+      <p class="skill-page__crumbs">Resources / <a href="../">Skills</a> / SKILL 路 07</p>
+      <h1 class="skill-page__title">CSS Grid 閫熸煡</h1>
+      <p class="skill-page__lede">浠庝竴琛岀殑鍗＄墖鍒版暣椤靛竷灞€銆侴rid 姣?Flex 鏇存搮闀?quot;浜岀淮&quot;銆?/p>
+      <div class="tag-list">
+        <span>CSS</span>
+        <span>Grid</span>
+        <span>甯冨眬</span>
+      </div>
+      <section class="skill-section">
+        <h2>鏍稿績姒傚康</h2>
+        <ul>
+          <li>Grid Container锛?code>display:grid</code></li>
+          <li>Grid Item锛氱洿鎺ュ瓙鍏冪礌</li>
+          <li>Track锛氳 / 鍒?/li>
+          <li>Cell锛氳鍒椾氦鐐?/li>
+          <li>Area锛氱煩褰㈠尯鍩燂紝鍙懡鍚?/li>
+        </ul>
+      </section>
+      <section class="skill-section">
+        <h2>瀹氫箟鍒椾笌琛?/h2>
+        <pre><code>.grid {
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;  /* 涓夊垪锛氬浐瀹?/ 寮规€?/ 鍥哄畾 */
+  grid-template-rows: auto 1fr auto;
+  gap: 16px;
+}
+
+/* 閲嶅涓庤嚜鍔ㄥ～鍏?*/
+grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));</code></pre>
+        <div class="callout">
+          <strong>auto-fit vs auto-fill</strong>
+          &lt;code&gt;auto-fill&lt;/code&gt; 淇濈暀绌鸿建閬擄紱&lt;code&gt;auto-fit&lt;/code&gt; 浼氭妸绌鸿建閬撳悎骞朵负 0锛屼粠鑰岃鐜版湁鏍煎瓙鍙樺ぇ銆傚崱鐗囧竷灞€甯哥敤 auto-fit銆?
+        </div>
+      </section>
+      <section class="skill-section">
+        <h2>鍛藉悕鍖哄煙</h2>
+        <pre><code>.layout {
+  display: grid;
+  grid-template-areas:
+    &quot;header header&quot;
+    &quot;sidebar main&quot;
+    &quot;footer footer&quot;;
+  grid-template-columns: 220px 1fr;
+  grid-template-rows: auto 1fr auto;
+}
+.header  { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.main    { grid-area: main; }
+.footer  { grid-area: footer; }</code></pre>
+      </section>
+      <section class="skill-section">
+        <h2>Item 鏀剧疆</h2>
+        <pre><code>.item {
+  grid-column: 1 / 3;        /* 璺ㄧ 1~2 鍒?*/
+  grid-row: span 2;          /* 璺?2 琛?*/
+  justify-self: center;      /* 鍒楁柟鍚?*/
+  align-self: end;           /* 琛屾柟鍚?*/
+}</code></pre>
+      </section>
+      <section class="skill-section">
+        <h2>甯歌妯″紡</h2>
+        <h3>鍦ｆ澂甯冨眬</h3>
+        <p>header / sidebar+main / footer 涓夋寮忥紝鐢?&lt;code&gt;grid-template-areas&lt;/code&gt; 鏈€鐩磋銆?/p>
+        <h3>12 鍒楃綉鏍?/h3>
+        <p>&lt;code&gt;grid-template-columns: repeat(12, 1fr);&lt;/code&gt;锛宨tem 鐢?&lt;code&gt;grid-column: span 4&lt;/code&gt; 鍗?1/3 瀹藉害銆?/p>
+        <h3>閲嶅彔鍏冪礌</h3>
+        <p>涓や釜 item 鐢ㄧ浉鍚?&lt;code&gt;grid-area&lt;/code&gt; 鍗冲彲閲嶅彔锛岄厤鍚?z-index 鎺у埗灞傛銆?/p>
+      </section>
+      <section class="skill-section">
+        <h2>涓?Flex 鐨勬惌閰?/h2>
+        <p>澶х粨鏋勭敤 Grid锛堜竴缁撮毦鍐欑殑浜岀淮甯冨眬锛夛紝缁勪欢鍐呴儴鐢?Flex锛堜竴琛?/ 涓€鍒楀唴鐨勫榻愶級銆?/p>
+      </section>
+      <nav class="skill-page__nav">
+        <a href="flexbox.html">
+          <p class="nav-hint">鈫?涓婁竴寮犻€熸煡</p>
+          <p class="nav-title">CSS Flexbox 閫熸煡</p>
+        </a>
+        <a href="js-es6.html">
+          <p class="nav-hint">涓嬩竴寮犻€熸煡 鈫?/p>
+          <p class="nav-title">JavaScript ES6+ 閫熸煡</p>
+        </a>
+      </nav>
+    </main>
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <div>e-workspace 路 Skills 路 SKILL 路 07</div>
+        <div>
+          <a href="../">鈫?Skills 绱㈠紩</a>
+          路
+          <a href="https://github.com/jeekeagle/e-workspace" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
