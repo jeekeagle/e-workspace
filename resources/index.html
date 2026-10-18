@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Resources · e-workspace</title>
-  <meta name="description" content="e-workspace 的 Resources 索引：Skills 速查、笔记与工具。" />
+  <meta name="description" content="e-workspace 的 Resources 索引：按分类筛选的 sheet 视图，所有可点击的 skills 一览。" />
   <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%23fefdfa'/><text x='50%25' y='54%25' text-anchor='middle' font-family='Georgia,serif' font-size='38' fill='oklch(0.55 0.15 250)'>e</text></svg>" />
   <link rel="stylesheet" href="../assets/styles.css" />
 </head>
@@ -29,35 +29,108 @@
 
     <main class="container layer">
       <section class="hero fade-up">
-        <p class="hero__eyebrow">Resources</p>
-        <h1 class="hero__title">把工具拆成<em>能直接打开的卡片</em></h1>
-        <p class="hero__lede">Resources 是 e-workspace 的索引页。每个子目录都是一组独立的 HTML，点开就是它的速查或笔记。</p>
+        <p class="hero__eyebrow">Resources · Sheet</p>
+        <h1 class="hero__title">把工具排成<em>一张 sheet</em>，按<em>分类筛选</em></h1>
+        <p class="hero__lede">下方是一张可筛选的 sheet 视图。每张卡片都打了分类标签，分类本身就是筛选器——目前所有卡片都默认在「默认」分类下。</p>
       </section>
 
-      <section class="section">
-        <div class="section__head">
-          <h2 class="section__title">分类</h2>
-          <span class="section__hint">2 个子模块</span>
+      <section>
+        <div class="sheet-controls" data-sheet-controls>
+          <span class="sheet-controls__label">筛选</span>
+          <button class="sheet-filter is-active" type="button" data-filter="默认">
+            默认<span class="sheet-filter__count" data-count="默认"></span>
+          </button>
+          <button class="sheet-filter" type="button" data-filter="技能">
+            技能<span class="sheet-filter__count" data-count="技能"></span>
+          </button>
+          <button class="sheet-filter" type="button" data-filter="设计">
+            设计<span class="sheet-filter__count" data-count="设计"></span>
+          </button>
+          <button class="sheet-filter" type="button" data-filter="工具">
+            工具<span class="sheet-filter__count" data-count="工具"></span>
+          </button>
+          <button class="sheet-filter" type="button" data-filter="导出">
+            导出<span class="sheet-filter__count" data-count="导出"></span>
+          </button>
         </div>
-        <div class="cards">
-          <a class="card" href="skills/">
-            <div class="card__icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13l2 2 4-4"/></svg>
+
+        <div class="sheet" data-sheet>
+          <a class="sheet-card" href="skills/e-show-skill.html"
+             data-cats="默认,技能"
+             data-name="e-show-skill">
+            <div class="sheet-card__head">
+              <span class="sheet-card__num">01</span>
+              <div class="sheet-card__badges">
+                <span class="sheet-badge is-primary">技能</span>
+              </div>
             </div>
-            <div class="card__hint">cheatsheets · 12</div>
-            <h3 class="card__title">Skills</h3>
-            <p class="card__desc">一组独立 HTML 的速查合集。每张卡片点开就是一个完整的速查页，可离线保存、复制、转发。</p>
-            <span class="card__count">→ 打开 /skills</span>
-          </a>
-          <a class="card" href="notes/">
-            <div class="card__icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h12l4 4v12a2 2 0 0 1-2 2H4z"/><path d="M16 4v4h4"/><path d="M8 12h8"/><path d="M8 16h6"/></svg>
+            <h3 class="sheet-card__title">e-show-skill</h3>
+            <p class="sheet-card__desc">为任意 skill 生成固定版式的单文件 HTML 介绍页。九节模板、九种内置 block，换字不换格。</p>
+            <div class="sheet-card__foot">
+              <span class="sheet-card__cat">intro</span>
+              <span class="sheet-card__open">打开 →</span>
             </div>
-            <div class="card__hint">notes · 1</div>
-            <h3 class="card__title">Notes</h3>
-            <p class="card__desc">一些没那么成型的思考与备忘。结构比 Skills 自由，更像草稿纸。</p>
-            <span class="card__count">→ 打开 /notes</span>
           </a>
+
+          <a class="sheet-card" href="skills/frontend-slides.html"
+             data-cats="默认,技能,设计"
+             data-name="frontend-slides">
+            <div class="sheet-card__head">
+              <span class="sheet-card__num">02</span>
+              <div class="sheet-card__badges">
+                <span class="sheet-badge is-primary">技能</span>
+                <span class="sheet-badge">设计</span>
+              </div>
+            </div>
+            <h3 class="sheet-card__title">frontend-slides</h3>
+            <p class="sheet-card__desc">用 HTML 做高保真幻灯片。从零写、或把 PPT 翻成 Web 页面，给非设计师挑美学方向。</p>
+            <div class="sheet-card__foot">
+              <span class="sheet-card__cat">intro</span>
+              <span class="sheet-card__open">打开 →</span>
+            </div>
+          </a>
+
+          <a class="sheet-card" href="skills/e-html-fonts.html"
+             data-cats="默认,技能,工具"
+             data-name="e-html-fonts">
+            <div class="sheet-card__head">
+              <span class="sheet-card__num">03</span>
+              <div class="sheet-card__badges">
+                <span class="sheet-badge is-primary">技能</span>
+                <span class="sheet-badge">工具</span>
+              </div>
+            </div>
+            <h3 class="sheet-card__title">e-html-fonts</h3>
+            <p class="sheet-card__desc">给 HTML 演示文稿加上"选区字号编辑"——键盘 / 滚轮调字号、本地持久化、可导出。</p>
+            <div class="sheet-card__foot">
+              <span class="sheet-card__cat">intro</span>
+              <span class="sheet-card__open">打开 →</span>
+            </div>
+          </a>
+
+          <a class="sheet-card" href="skills/e-html-pdf.html"
+             data-cats="默认,技能,工具,导出"
+             data-name="e-html-pdf">
+            <div class="sheet-card__head">
+              <span class="sheet-card__num">04</span>
+              <div class="sheet-card__badges">
+                <span class="sheet-badge is-primary">技能</span>
+                <span class="sheet-badge">工具</span>
+                <span class="sheet-badge">导出</span>
+              </div>
+            </div>
+            <h3 class="sheet-card__title">e-html-pdf</h3>
+            <p class="sheet-card__desc">用 Edge 无头打印把自包含 HTML / 幻灯片连续分页导出为 PDF，含打印态校验与页数核对。</p>
+            <div class="sheet-card__foot">
+              <span class="sheet-card__cat">intro</span>
+              <span class="sheet-card__open">打开 →</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="sheet-more">
+          <span>→ 其他模块：<a href="skills/">12 张速查</a> · <a href="notes/">Notes</a></span>
+          <span>默认显示全部，分类即筛选</span>
         </div>
       </section>
     </main>
@@ -73,5 +146,61 @@
       </div>
     </footer>
   </div>
+
+  <script>
+    (function () {
+      const controls = document.querySelector("[data-sheet-controls]");
+      const sheet = document.querySelector("[data-sheet]");
+      if (!controls || !sheet) return;
+
+      const filters = Array.from(controls.querySelectorAll("[data-filter]"));
+      const cards = Array.from(sheet.querySelectorAll(".sheet-card"));
+
+      // Compute per-category counts (默认 = total visible)
+      const counts = { "默认": cards.length };
+      cards.forEach((card) => {
+        const cats = (card.dataset.cats || "")
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean);
+        cats.forEach((c) => { counts[c] = (counts[c] || 0) + 1; });
+      });
+
+      filters.forEach((btn) => {
+        const cat = btn.dataset.filter;
+        const c = btn.querySelector("[data-count]");
+        if (c) c.textContent = "(" + (counts[cat] || 0) + ")";
+      });
+
+      function applyFilter(cat) {
+        cards.forEach((card) => {
+          const cats = (card.dataset.cats || "")
+            .split(",")
+            .map((s) => s.trim());
+          const match = cat === "默认" ? true : cats.indexOf(cat) !== -1;
+          card.classList.toggle("is-hidden", !match);
+        });
+        let empty = sheet.querySelector(".sheet-empty");
+        const visible = cards.filter((c) => !c.classList.contains("is-hidden"));
+        if (visible.length === 0) {
+          if (!empty) {
+            empty = document.createElement("div");
+            empty.className = "sheet-empty";
+            empty.textContent = "这个分类下还没有卡片。";
+            sheet.appendChild(empty);
+          }
+        } else if (empty) {
+          empty.remove();
+        }
+      }
+
+      filters.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          filters.forEach((b) => b.classList.toggle("is-active", b === btn));
+          applyFilter(btn.dataset.filter);
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>e-html-fonts · 选区字号编辑</title>
+<style>
+  /* ============  设计令牌（固定风格） ============ */
+  :root {
+    --ink:       #14181c;
+    --ink-soft:  #4a525a;
+    --ink-mute:  #8a9099;
+    --rule:      #e6e6e6;
+    --rule-soft: #f0f0f0;
+    --bg:        #ffffff;
+    --accent:    #0f5e54;
+    --accent-bg: #f3f7f5;
+
+    --page:      1000px;
+    --side-w:    200px;
+    --side-gap:  64px;
+    --main-w:    680px;
+    --gutter:    48px;
+    --indent:    2em;
+
+    --serif: "Source Serif Pro", "Source Han Serif SC", "Noto Serif CJK SC",
+             "Songti SC", "STSong", "宋体", Georgia, serif;
+    --sans:  -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+             "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    --mono:  "SF Mono", "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    text-rendering: optimizeLegibility;
+  }
+
+  .page {
+    max-width: var(--page);
+    margin: 0 auto;
+    padding: 80px 32px 128px;
+    display: grid;
+    grid-template-columns: var(--side-w) 1fr;
+    column-gap: var(--side-gap);
+    align-items: start;
+  }
+
+  .side {
+    position: sticky;
+    top: 64px;
+    align-self: start;
+  }
+  .side .brand {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 40px;
+  }
+  .side .brand .dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  .side .brand .name { color: var(--ink); }
+
+  .side .toc-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin: 0 0 16px;
+  }
+  .side .toc {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: toc;
+    border-top: 1px solid var(--rule);
+  }
+  .side .toc li {
+    counter-increment: toc;
+    margin: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .side .toc a {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 10px 0 10px 12px;
+    margin-left: -13px;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-family: var(--sans);
+    font-size: 13.5px;
+    line-height: 1.4;
+    border-left: 1px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .side .toc a::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-mute);
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+    min-width: 18px;
+  }
+  .side .toc a:hover { color: var(--ink); }
+  .side .toc a.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+  }
+  .side .toc a.active::before { color: var(--accent); }
+
+  .side .meta-foot {
+    margin-top: 40px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-mute);
+    letter-spacing: 0.08em;
+    line-height: 1.8;
+  }
+
+  main {
+    max-width: var(--main-w);
+    width: 100%;
+    min-width: 0;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 64px;
+  }
+  .topbar .left { color: var(--ink); }
+
+  .lede { margin-bottom: 88px; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 20px;
+  }
+  h1.name {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 20px;
+    color: var(--ink);
+  }
+  h1.name .slash {
+    color: var(--ink-mute);
+    font-weight: 300;
+    margin: 0 0.15em;
+  }
+  .tagline {
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    font-weight: 400;
+    font-style: italic;
+    margin: 0;
+    max-width: 560px;
+  }
+  .meta {
+    display: flex;
+    gap: 32px;
+    margin-top: 40px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-mute);
+    letter-spacing: 0.05em;
+    flex-wrap: wrap;
+  }
+  .meta span strong { color: var(--ink); font-weight: 500; }
+
+  section { margin: var(--gutter) 0; }
+  section h2 {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 24px;
+    color: var(--ink);
+  }
+  section h2 .num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-mute);
+    letter-spacing: 0.15em;
+    display: inline-block;
+    width: var(--indent);
+    margin-left: calc(var(--indent) * -1);
+  }
+  section h2 .num::after { content: "·"; margin: 0 8px; color: var(--accent); }
+  section p { margin: 0 0 16px; color: var(--ink); }
+  section p.lede { color: var(--ink-soft); font-size: 17px; }
+
+  ul, ol { padding-left: 20px; margin: 0 0 16px; }
+  li { margin-bottom: 8px; }
+  li::marker { color: var(--ink-mute); }
+
+  blockquote {
+    margin: 32px 0;
+    padding: 16px 20px;
+    background: var(--accent-bg);
+    border-left: 2px solid var(--accent);
+    color: var(--ink-soft);
+    font-family: var(--serif);
+    font-size: 16px;
+    font-style: italic;
+  }
+  blockquote p { margin: 0; }
+
+  code, kbd {
+    font-family: var(--mono);
+    font-size: 0.92em;
+    background: var(--rule-soft);
+    color: var(--ink);
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+  pre {
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.6;
+    background: var(--rule-soft);
+    color: var(--ink);
+    padding: 18px 20px;
+    border-radius: 2px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+  }
+  pre code { background: none; padding: 0; font-size: 13px; }
+
+  .demo {
+    background: var(--rule-soft);
+    padding: 24px;
+    border-radius: 2px;
+    margin: 16px 0 24px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+  .demo .k { color: var(--ink); }
+  .demo .c { color: var(--ink-mute); }
+  .demo .a { color: var(--accent); }
+
+  .files {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 8px;
+    font-size: 14px;
+  }
+  .files th, .files td {
+    text-align: left;
+    padding: 12px 8px 12px 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .files th {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-mute);
+    font-weight: 500;
+    border-bottom: 1px solid var(--ink);
+  }
+  .files td code { font-size: 12.5px; }
+
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 16px 0;
+  }
+  .split .col {
+    padding: 20px 22px;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+  }
+  .split .col h4 {
+    margin: 0 0 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .split .col p { margin: 0 0 8px; font-size: 14.5px; color: var(--ink-soft); }
+
+  .palette {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin: 16px 0 24px;
+  }
+  .palette .swatch {
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .palette .chip {
+    height: 56px;
+  }
+  .palette .info {
+    padding: 10px 12px;
+    font-family: var(--mono);
+    font-size: 10px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+  }
+  .palette .info .name { color: var(--ink); display: block; margin-bottom: 2px; }
+
+  footer {
+    margin-top: 96px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-mute);
+    letter-spacing: 0.08em;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  @media print {
+    .side { position: static; }
+    .page { display: block; padding: 0; }
+    main { max-width: 100%; }
+    section { page-break-inside: avoid; }
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .lede, section, footer, .side { animation: rise 0.6s ease-out both; }
+  section:nth-of-type(1) { animation-delay: 0.05s; }
+  section:nth-of-type(2) { animation-delay: 0.10s; }
+  section:nth-of-type(3) { animation-delay: 0.15s; }
+  section:nth-of-type(4) { animation-delay: 0.20s; }
+  section:nth-of-type(5) { animation-delay: 0.25s; }
+  section:nth-of-type(6) { animation-delay: 0.30s; }
+  section:nth-of-type(7) { animation-delay: 0.35s; }
+  section:nth-of-type(8) { animation-delay: 0.40s; }
+  section:nth-of-type(9) { animation-delay: 0.45s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; }
+  }
+
+  @media (max-width: 900px) {
+    .page {
+      grid-template-columns: 1fr;
+      row-gap: 32px;
+      padding: 48px 22px 80px;
+    }
+    .side { position: static; }
+    .side .meta-foot { display: none; }
+    h1.name { font-size: 44px; }
+    .tagline { font-size: 18px; }
+    .split { grid-template-columns: 1fr; gap: 16px; }
+    .palette { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ============  左侧目录 ============ -->
+  <aside class="side" aria-label="目录">
+    <div class="brand">
+      <span class="dot"></span><span class="name">e-html-fonts</span>
+    </div>
+    <p class="toc-label">目录</p>
+    <ol class="toc" id="toc">
+      <li><a href="#what">它是什么</a></li>
+      <li><a href="#why">为什么需要</a></li>
+      <li><a href="#principle">设计原则</a></li>
+      <li><a href="#layout">布局结构</a></li>
+      <li><a href="#tokens">设计令牌</a></li>
+      <li><a href="#blocks">内容块</a></li>
+      <li><a href="#use">怎么复用</a></li>
+      <li><a href="#scenes">适用与不适用</a></li>
+      <li><a href="#spec">规格速查</a></li>
+    </ol>
+    <div class="meta-foot">
+      e-html-fonts<br>
+      选区字号 · 单文件<br>
+      v1.0
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- ============  顶部条 ============ -->
+    <div class="topbar">
+      <span class="left">选区字号编辑</span>
+      <span>v1.0</span>
+    </div>
+
+    <!-- ============  标题区 ============ -->
+    <header class="lede">
+      <p class="eyebrow">A Skill Template</p>
+      <h1 class="name">e-html-fonts<span class="slash">/</span><span style="font-size:0.5em; font-weight:300; color:var(--ink-soft);">选区字号编辑</span></h1>
+      <p class="tagline">给单文件 HTML 幻灯片装一套"选中文字后连续调整字号"的能力。改字号不重排版，不破坏原结构。</p>
+      <div class="meta">
+        <span>类型 · <strong>运行时注入</strong></span>
+        <span>形态 · <strong>单文件 · 零依赖</strong></span>
+        <span>依赖 · <strong>无</strong></span>
+      </div>
+    </header>
+
+    <!-- ============  它是什么 ============ -->
+    <section id="what">
+      <h2><span class="num">01</span>它是什么</h2>
+      <p class="lede">e-html-fonts 是给单文件 HTML 幻灯片加装的"选区字号"运行时编辑层。</p>
+      <p>用法极简：跑一次安装器，把一段脚本注入到 <code>&lt;/body&gt;</code> 之前，从此这一份 HTML 演示稿就支持"选文字 → 按快捷键 → 改字号"的能力。注入后<strong>仍然单文件、零依赖、可离线打开</strong>。</p>
+      <p>它<strong>只</strong>负责一件事：<strong>运行时选区字号</strong>。全篇默认字体、字体家族、版式设计不在它的边界内。</p>
+      <blockquote>
+        <p>相同内容始终只有一个有效字号标记 <code>span[data-html-fonts="1"]</code>，不允许嵌套。</p>
+      </blockquote>
+    </section>
+
+    <!-- ============  为什么需要 ============ -->
+    <section id="why">
+      <h2><span class="num">02</span>为什么需要</h2>
+      <p>HTML 演示稿改字号有三种典型场景，都很痛：</p>
+      <ul>
+        <li><strong>临时强调某段</strong>——复制粘贴到 PPT 改字号再贴回来，破坏幻灯源代码、改了不想改的地方。</li>
+        <li><strong>现场调整</strong>——演讲时发现某段字号太小或太大，没法改，要靠"凑合讲过去"。</li>
+        <li><strong>反复试</strong>——想比较 24px / 28px / 32px 哪种合适，没有可逆工具。</li>
+      </ul>
+      <p>通用富文本编辑器太重，浏览器原生命令只在当前会话生效。需要一种<strong>轻量、可注入、可持久化</strong>的中间态——这正是 e-html-fonts 提供的。</p>
+    </section>
+
+    <!-- ============  设计原则 ============ -->
+    <section id="principle">
+      <h2><span class="num">03</span>设计原则</h2>
+      <p>六条规矩，撑住"选区 + 单文件 + 可复用"三个承诺：</p>
+      <ol>
+        <li><strong>选区优先</strong>——只动选区字号，不动全篇默认字体、字体家族、版式。</li>
+        <li><strong>单文件</strong>——注入后必须可离线打开，不引外链、不引 JS 库。</li>
+        <li><strong>幂等</strong>——已有等价编辑器时不得重复注入；安装器要能反复跑。</li>
+        <li><strong>持久化但有底线</strong>——按文本块写入 <code>localStorage</code>，恢复时先比原文，不让旧存档覆盖新版课件。</li>
+        <li><strong>步进固定</strong>——每次 2px，范围 8–300px；多次按压可逆可回。</li>
+        <li><strong>捕获阶段监听</strong>——快捷键命中字号操作时阻止默认缩放与翻页，避免副作用。</li>
+      </ol>
+    </section>
+
+    <!-- ============  布局结构 ============ -->
+    <section id="layout">
+      <h2><span class="num">04</span>布局结构</h2>
+      <p>五步流程，单次安装：</p>
+      <div class="demo">
+<span class="c">① 读源 HTML</span>　　　检测是否已含 <span class="a">adjustSelectionFontSize</span><br>
+<span class="c">　　↓</span><br>
+<span class="c">② 等价则跳过</span>　　已有编辑器不重复注入<br>
+<span class="c">　　↓</span><br>
+<span class="c">③ 注入脚本</span>　　　插入 <span class="a">&lt;/body&gt;</span> 前　<span class="a">单文件 · 零依赖</span><br>
+<span class="c">　　↓</span><br>
+<span class="c">④ 写 localStorage</span>　按文本块持久化字号<br>
+<span class="c">　　↓</span><br>
+<span class="c">⑤ 验证步进</span>　　　<span class="a">29 → 27 → 25 → 23</span>
+      </div>
+      <p>前两步是<strong>幂等保护</strong>，保证同一份课件可以反复注入不膨胀；后三步是<strong>运行时机制</strong>，由注入脚本在浏览器内完成。</p>
+    </section>
+
+    <!-- ============  设计令牌 ============ -->
+    <section id="tokens">
+      <h2><span class="num">05</span>设计令牌</h2>
+      <p class="lede">e-html-fonts 的"令牌"是<strong>行为参数</strong>，不是视觉令牌——一组决定运行时表现的硬约束：</p>
+      <div class="files" style="margin-bottom:24px;">
+        <thead>
+          <tr>
+            <th style="width:40%;">参数</th>
+            <th>值</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>步进</code></td>           <td>2px / 次</td></tr>
+          <tr><td><code>字号范围</code></td>      <td>8 – 300 px</td></tr>
+          <tr><td><code>快捷键（增）</code></td>  <td>Ctrl+= · Ctrl+Shift+&gt; · Ctrl+滚轮上</td></tr>
+          <tr><td><code>快捷键（减）</code></td>  <td>Ctrl+- · Ctrl+Shift+&lt; · Ctrl+滚轮下</td></tr>
+          <tr><td><code>标记属性</code></td>      <td>span[data-html-fonts="1"]</td></tr>
+          <tr><td><code>持久化</code></td>        <td>localStorage（按文本块）</td></tr>
+          <tr><td><code>导出</code></td>          <td>Ctrl+S（仅当目标无自带导出器）</td></tr>
+        </tbody>
+      </div>
+      <p>几个不能动的"颜色块"：</p>
+      <div class="palette">
+        <div class="swatch">
+          <div class="chip" style="background:#14181c"></div>
+          <div class="info"><span class="name">步进</span>2px</div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:#4a525a"></div>
+          <div class="info"><span class="name">下限</span>8px</div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:#8a9099"></div>
+          <div class="info"><span class="name">上限</span>300px</div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:#e6e6e6;border:1px solid #ddd"></div>
+          <div class="info"><span class="name">标记</span>[data-html-fonts]</div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:#0f5e54"></div>
+          <div class="info"><span class="name">存储</span>localStorage</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============  内容块 ============ -->
+    <section id="blocks">
+      <h2><span class="num">06</span>内容块</h2>
+      <p>模板内置 9 种 block，e-html-fonts 用得最多的是 <code>code</code> + <code>pre</code>：</p>
+      <pre><code># 安装（默认输出新文件，源文件不动）
+node scripts/install-font-editor.mjs input.html --output output.html
+
+# 仅在用户明确要求时覆盖原文件
+node scripts/install-font-editor.mjs input.html --in-place</code></pre>
+      <pre><code>// 标记规范：相同内容只允许一个有效字号标记
+// 旧标记 &lt;font size="7"&gt; 会被转换为：
+&lt;span data-html-fonts="1" style="font-size: 27px"&gt;...&lt;/span&gt;
+
+// 后续按键读取当前计算字号，而非原段落字号
+const current = getComputedStyle(node).fontSize;</code></pre>
+      <div class="split">
+        <div class="col">
+          <h4>结构类</h4>
+          <p><code>.lede</code>　段首引导</p>
+          <p><code>.num</code>　章节编号</p>
+          <p><code>.topbar</code>　顶部条</p>
+        </div>
+        <div class="col">
+          <h4>数据类</h4>
+          <p><code>.files</code>　参数表</p>
+          <p><code>.split</code>　对比</p>
+          <p><code>.palette</code>　关键值卡</p>
+        </div>
+        <div class="col">
+          <h4>强调类</h4>
+          <p><code>blockquote</code>　边界声明</p>
+          <p><code>code</code> / <code>pre</code>　<strong>主用</strong></p>
+          <p><code>.demo</code>　五步流程</p>
+        </div>
+        <div class="col">
+          <h4>交互类</h4>
+          <p><code>.toc</code>　目录联动</p>
+          <p><code>section[id]</code>　锚点</p>
+          <p><code>:hover</code> / <code>.active</code>　状态</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============  怎么复用 ============ -->
+    <section id="use">
+      <h2><span class="num">07</span>怎么复用</h2>
+      <p>五步开新页：</p>
+      <ol>
+        <li><strong>跑安装器</strong>——<code>node scripts/install-font-editor.mjs input.html --output output.html</code>，默认输出新文件，源文件不动。</li>
+        <li><strong>检查幂等</strong>——再跑一次，输出文件不应多出第二份 <code>adjustSelectionFontSize</code> 或 <code>data-html-fonts-installer</code>。</li>
+        <li><strong>打开浏览器验证</strong>——选中一段连续文字，按 <code>Ctrl+-</code> 三次，应看到 <code>29 → 27 → 25 → 23px</code>，<code>Ctrl+=</code> 反向恢复。</li>
+        <li><strong>测折叠态</strong>——收起选区再继续按快捷键仍生效；<code>Ctrl+滚轮</code> 与别名产生相同步进。</li>
+        <li><strong>测导出</strong>——<code>Ctrl+S</code> 应导出当前 HTML；若目标课件已有导出器，保留原行为不覆盖。</li>
+      </ol>
+      <blockquote>
+        <p>恢复字号时先比较文本块原文，旧存档不会覆盖新版课件内容。</p>
+      </blockquote>
+    </section>
+
+    <!-- ============  适用与不适用 ============ -->
+    <section id="scenes">
+      <h2><span class="num">08</span>适用与不适用</h2>
+      <p><strong>适合：</strong></p>
+      <ul>
+        <li>单文件 HTML 幻灯片——演讲、内训、产品发布，想临时调整字号。</li>
+        <li>字号试错——在 24 / 28 / 32 px 之间反复比较，找到合适的。</li>
+        <li>离线演示场景——注入后无外部依赖，U 盘拷过去即用。</li>
+        <li>已有自定义脚本的小型课件——追加能力而非替换。</li>
+      </ul>
+      <p><strong>不适合：</strong></p>
+      <ul>
+        <li>全篇默认字号调整——这是设计任务，不该在运行时改。</li>
+        <li>字体家族更换、字重、字间距——超出"选区字号"边界。</li>
+        <li>版式重排、网格调整——属于设计层，不归运行时管。</li>
+        <li>需要协同的演示稿——<code>localStorage</code> 是本地的，跨设备不同步。</li>
+      </ul>
+    </section>
+
+    <!-- ============  规格速查 ============ -->
+    <section id="spec">
+      <h2><span class="num">09</span>规格速查</h2>
+      <table class="files">
+        <thead>
+          <tr>
+            <th style="width:40%;">项</th>
+            <th>值</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>触发</code></td>             <td>选中文字 + 快捷键 / Ctrl+滚轮</td></tr>
+          <tr><td><code>快捷键（增）</code></td>     <td>Ctrl+= · Ctrl+Shift+&gt;</td></tr>
+          <tr><td><code>快捷键（减）</code></td>     <td>Ctrl+- · Ctrl+Shift+&lt;</td></tr>
+          <tr><td><code>滚轮</code></td>             <td>Ctrl+滚轮 等步进</td></tr>
+          <tr><td><code>步进</code></td>             <td>2px / 次</td></tr>
+          <tr><td><code>范围</code></td>             <td>8 – 300 px</td></tr>
+          <tr><td><code>标记</code></td>             <td>span[data-html-fonts="1"]</td></tr>
+          <tr><td><code>持久化</code></td>           <td>localStorage（按文本块）</td></tr>
+          <tr><td><code>导出</code></td>             <td>Ctrl+S（仅当目标无自带导出器）</td></tr>
+          <tr><td><code>依赖</code></td>             <td>零（无 JS 库、无外部 CSS）</td></tr>
+          <tr><td><code>文件清单</code></td>         <td>SKILL.md · scripts/install-font-editor.mjs</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ============  页脚 ============ -->
+    <footer>
+      <span>e-html-fonts · 选区字号 · 单文件 · 零依赖</span>
+      <span>本页即示例 · 2026-10-18</span>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  /* ============  滚动同步：当前章节高亮 ============ */
+  (function () {
+    const links = document.querySelectorAll('#toc a');
+    const map = new Map();
+    links.forEach(a => {
+      const id = a.getAttribute('href').slice(1);
+      const sec = document.getElementById(id);
+      if (sec) map.set(sec, a);
+    });
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          links.forEach(a => a.classList.remove('active'));
+          const a = map.get(e.target);
+          if (a) a.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+    map.forEach((_, sec) => io.observe(sec));
+  })();
+</script>
+</body>
+</html>

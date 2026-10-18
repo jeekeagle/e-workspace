@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>frontend-slides · skill 介绍</title>
+<style>
+  /* ============  设计令牌（固定风格） ============ */
+  :root {
+    --ink:       #14181c;
+    --ink-soft:  #4a525a;
+    --ink-mute:  #8a9099;
+    --rule:      #e6e6e6;
+    --rule-soft: #f0f0f0;
+    --bg:        #ffffff;
+    --accent:    #0f5e54;
+    --accent-bg: #f3f7f5;
+
+    --page:      1000px;
+    --side-w:    200px;
+    --side-gap:  64px;
+    --main-w:    680px;
+    --gutter:    48px;
+    --indent:    2em;
+
+    --serif: "Source Serif Pro", "Source Han Serif SC", "Noto Serif CJK SC",
+             "Songti SC", "STSong", "宋体", Georgia, serif;
+    --sans:  -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+             "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    --mono:  "SF Mono", "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    text-rendering: optimizeLegibility;
+  }
+
+  .page {
+    max-width: var(--page);
+    margin: 0 auto;
+    padding: 80px 32px 128px;
+    display: grid;
+    grid-template-columns: var(--side-w) 1fr;
+    column-gap: var(--side-gap);
+    align-items: start;
+  }
+
+  .side {
+    position: sticky;
+    top: 64px;
+    align-self: start;
+  }
+  .side .brand {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 40px;
+  }
+  .side .brand .dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  .side .brand .name { color: var(--ink); }
+
+  .side .toc-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin: 0 0 16px;
+  }
+  .side .toc {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: toc;
+    border-top: 1px solid var(--rule);
+  }
+  .side .toc li {
+    counter-increment: toc;
+    margin: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .side .toc a {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 10px 0 10px 12px;
+    margin-left: -13px;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-family: var(--sans);
+    font-size: 13.5px;
+    line-height: 1.4;
+    border-left: 1px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .side .toc a::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-mute);
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+    min-width: 18px;
+  }
+  .side .toc a:hover { color: var(--ink); }
+  .side .toc a.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+  }
+  .side .toc a.active::before { color: var(--accent); }
+
+  .side .meta-foot {
+    margin-top: 40px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-mute);
+    letter-spacing: 0.08em;
+    line-height: 1.8;
+  }
+
+  main {
+    max-width: var(--main-w);
+    width: 100%;
+    min-width: 0;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 64px;
+  }
+  .topbar .left { color: var(--ink); }
+
+  .lede { margin-bottom: 88px; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 20px;
+  }
+  h1.name {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 20px;
+    color: var(--ink);
+  }
+  h1.name .slash {
+    color: var(--ink-mute);
+    font-weight: 300;
+    margin: 0 0.15em;
+  }
+  .tagline {
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    font-weight: 400;
+    font-style: italic;
+    margin: 0;
+    max-width: 560px;
+  }
+  .meta {
+    display: flex;
+    gap: 32px;
+    margin-top: 40px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-mute);
+    letter-spacing: 0.05em;
+    flex-wrap: wrap;
+  }
+  .meta span strong { color: var(--ink); font-weight: 500; }
+
+  section { margin: var(--gutter) 0; }
+  section h2 {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 24px;
+    color: var(--ink);
+  }
+  section h2 .num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-mute);
+    letter-spacing: 0.15em;
+    display: inline-block;
+    width: var(--indent);
+    margin-left: calc(var(--indent) * -1);
+  }
+  section h2 .num::after { content: "·"; margin: 0 8px; color: var(--accent); }
+  section p { margin: 0 0 16px; color: var(--ink); }
+  section p.lede { color: var(--ink-soft); font-size: 17px; }
+
+  ul, ol { padding-left: 20px; margin: 0 0 16px; }
+  li { margin-bottom: 8px; }
+  li::marker { color: var(--ink-mute); }
+
+  blockquote {
+    margin: 32px 0;
+    padding: 16px 20px;
+    background: var(--accent-bg);
+    border-left: 2px solid var(--accent);
+    color: var(--ink-soft);
+    font-family: var(--serif);
+    font-size: 16px;
+    font-style: italic;
+  }
+  blockquote p { margin: 0; }
+
+  code, kbd {
+    font-family: var(--mono);
+    font-size: 0.92em;
+    background: var(--rule-soft);
+    color: var(--ink);
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+  pre {
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.6;
+    background: var(--rule-soft);
+    color: var(--ink);
+    padding: 18px 20px;
+    border-radius: 2px;
+    overflow-x: auto;
+    margin: 16px 0 24px;
+  }
+  pre code { background: none; padding: 0; font-size: 13px; }
+
+  .files {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 8px;
+    font-size: 14px;
+  }
+  .files th, .files td {
+    text-align: left;
+    padding: 12px 8px 12px 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .files th {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-mute);
+    font-weight: 500;
+    border-bottom: 1px solid var(--ink);
+  }
+  .files td code { font-size: 12.5px; }
+  .files td.mute { color: var(--ink-soft); }
+
+  footer {
+    margin-top: 96px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-mute);
+    letter-spacing: 0.08em;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  @media print {
+    .side { position: static; }
+    .page { display: block; padding: 0; }
+    main { max-width: 100%; }
+    section { page-break-inside: avoid; }
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .lede, section, footer, .side { animation: rise 0.6s ease-out both; }
+  section:nth-of-type(1) { animation-delay: 0.05s; }
+  section:nth-of-type(2) { animation-delay: 0.10s; }
+  section:nth-of-type(3) { animation-delay: 0.15s; }
+  section:nth-of-type(4) { animation-delay: 0.20s; }
+  section:nth-of-type(5) { animation-delay: 0.25s; }
+  section:nth-of-type(6) { animation-delay: 0.30s; }
+  section:nth-of-type(7) { animation-delay: 0.35s; }
+  section:nth-of-type(8) { animation-delay: 0.40s; }
+  section:nth-of-type(9) { animation-delay: 0.45s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; }
+  }
+
+  @media (max-width: 900px) {
+    .page {
+      grid-template-columns: 1fr;
+      row-gap: 32px;
+      padding: 48px 22px 80px;
+    }
+    .side { position: static; }
+    .side .meta-foot { display: none; }
+    h1.name { font-size: 44px; }
+    .tagline { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ============  左侧目录 ============ -->
+  <aside class="side" aria-label="目录">
+    <div class="brand">
+      <span class="dot"></span><span class="name">e-show-skill</span>
+    </div>
+    <p class="toc-label">目录</p>
+    <ol class="toc" id="toc">
+      <li><a href="#what">它是什么</a></li>
+      <li><a href="#trigger">怎么触发</a></li>
+      <li><a href="#core">核心机制</a></li>
+      <li><a href="#io">输入与产出</a></li>
+      <li><a href="#base">设计基底</a></li>
+      <li><a href="#rhythm">幻灯节奏</a></li>
+      <li><a href="#example">一页例子</a></li>
+      <li><a href="#scenes">适用与不适用</a></li>
+      <li><a href="#start">三步开干</a></li>
+    </ol>
+    <div class="meta-foot">
+      e-show-skill<br>
+      固定风格 · 白底 · 单栏<br>
+      v1.1
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- ============  顶部条 ============ -->
+    <div class="topbar">
+      <span class="left">skill 介绍</span>
+      <span>frontend-slides · v3.0</span>
+    </div>
+
+    <!-- ============  标题区 ============ -->
+    <header class="lede">
+      <p class="eyebrow">A Skill Card</p>
+      <h1 class="name">frontend-slides<span class="slash">/</span><span style="font-size:0.5em; font-weight:300; color:var(--ink-soft);">静态幻灯片生成</span></h1>
+      <p class="tagline">把一篇稿子打磨成可放映的纯 HTML 幻灯片——单文件、零依赖，放映与打印同源。</p>
+      <div class="meta">
+        <span>分类 · <strong>presentation</strong></span>
+        <span>触发 · <strong>/frontend-slides</strong></span>
+        <span>风格 · <strong>静态 HTML · 印刷感</strong></span>
+      </div>
+    </header>
+
+    <!-- ============  01 它是什么 ============ -->
+    <section id="what">
+      <h2><span class="num">01</span>它是什么</h2>
+      <p class="lede">frontend-slides 是一个把稿子变成可放映 HTML 幻灯片的 skill。它接 outline、章节、要点列，吐出一份单文件、零外部依赖、可在浏览器全屏放映的 <code>.html</code>。</p>
+      <p>它给稿子套上幻灯节奏：一屏一题，行数封顶，引用必有出处。多余的论述被强制外溢到下一屏，或下沉到演讲者备注。</p>
+      <p>它交付的是一份印刷品——浏览器里放、投影仪投、A4 黑白印，是同一份字。</p>
+      <blockquote>
+        <p>它牺牲动画、图表、视频，换来的是：每一页都能讲、都能印、都能存档。</p>
+      </blockquote>
+    </section>
+
+    <!-- ============  02 怎么触发 ============ -->
+    <section id="trigger">
+      <h2><span class="num">02</span>怎么触发</h2>
+      <p>在对话框直接输入：</p>
+<pre><code>/frontend-slides 把上周三的读书会记录整理成一组幻灯片</code></pre>
+      <p>触发参数里贴上原始材料。可以是会议纪要、章节草稿、bullet 大纲、一段讲稿——甚至是一份录音转写。</p>
+      <p>agent 接到后会先做<strong>内容清洗</strong>——把口语化的连篇段落拆成一屏一题的短句——再排版，不会原样照搬。如果稿件太散，它会反问"讲给谁听、时长多少"。</p>
+    </section>
+
+    <!-- ============  03 核心机制 ============ -->
+    <section id="core">
+      <h2><span class="num">03</span>核心机制</h2>
+      <p>frontend-slides 同时守住两件事，少一件都不算完：</p>
+      <ol>
+        <li><strong>一屏一题</strong>——每张 slide 只能承载一个核心命题。多余的文字会被强制外溢到下一屏，或下沉到演讲者备注。这是它的根本节奏：长稿必须被切碎，不能任由作者堆砌。</li>
+        <li><strong>放映与打印同源</strong>——同一份 HTML 在浏览器全屏、投影仪投射、A4 黑白打印三个场景下，版式不塌。靠的是相对单位、同一套 token、避开依赖具体屏幕宽度的写法。</li>
+      </ol>
+      <p>切屏靠 <strong>scroll-snap</strong> 滚动吸附，不用键盘翻页器也能"刷到下一屏"；同时键盘 <code>↓</code> / <code>Space</code> / <code>PageDown</code> 同效。</p>
+      <blockquote>
+        <p>不强制要键盘控制，但保留——投影现场的网络设备不响应 <code>Space</code> 时，你还能滚轮过去救场。</p>
+      </blockquote>
+    </section>
+
+    <!-- ============  04 输入与产出 ============ -->
+    <section id="io">
+      <h2><span class="num">04</span>输入与产出</h2>
+      <p><strong>能吃下的输入：</strong></p>
+      <table class="files">
+        <thead>
+          <tr>
+            <th style="width:36%">类型</th>
+            <th>处理方式</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>会议纪要 / 录音转写</td>         <td class="mute">长流水，先抽论点再切屏。</td></tr>
+          <tr><td>章节草稿（Markdown / Word）</td>   <td class="mute">按段落切屏，标题直接做页眉。</td></tr>
+          <tr><td>纯 bullet 大纲</td>              <td class="mute">一条一屏。</td></tr>
+          <tr><td>已发表的讲稿 / 文章</td>        <td class="mute">按论点切屏，引文段直接做页脚。</td></tr>
+        </tbody>
+      </table>
+      <p><strong>产出文件：</strong></p>
+      <table class="files">
+        <tbody>
+          <tr><td style="width:36%"><code>&lt;name&gt;-slides.html</code></td><td class="mute">主件——放映、打印、发链接，都用它。</td></tr>
+          <tr><td><code>&lt;name&gt;-notes.md</code></td>               <td class="mute">演讲者备注。每页一段，详于页面正文。</td></tr>
+          <tr><td><code>&lt;name&gt;-slides.pdf</code></td>            <td class="mute">可选。需要时走浏览器打印，或 wkhtmltopdf。</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ============  05 设计基底 ============ -->
+    <section id="base">
+      <h2><span class="num">05</span>设计基底</h2>
+      <p>frontend-slides 的视觉选择有六项明确决定，slide 内部全部遵循：</p>
+      <ul>
+        <li><strong>衬线大标</strong>——Source Serif Pro / 宋体，64–96px，远观可读</li>
+        <li><strong>等宽小标</strong>——SF Mono / Consolas，11–13px，编号、页码、文件名</li>
+        <li><strong>墨青主色</strong>——<code>#0f5e54</code>，仅用于强调与编号小点</li>
+        <li><strong>白底深墨</strong>——白底 + <code>#14181c</code> 正文，避开渐变与暗色背景</li>
+        <li><strong>视口吸附</strong>——每屏 <code>100vh</code>，<code>scroll-snap</code> 切屏</li>
+        <li><strong>页码显形</strong>——右下角小号"03 / 12"格式</li>
+      </ul>
+      <p>六项不靠 CSS 框架实现，全部内联在单文件 HTML 里。打印走浏览器原生 <code>@media print</code>，白底黑字直出。</p>
+    </section>
+
+    <!-- ============  06 幻灯节奏 ============ -->
+    <section id="rhythm">
+      <h2><span class="num">06</span>幻灯节奏</h2>
+      <p>frontend-slides 写出的每张 slide 必须满足五条规矩：</p>
+      <ol>
+        <li><strong>一题</strong>——一张 slide 只能主张一件事。出现第二件事，就拆。</li>
+        <li><strong>一行</strong>——核心命题用一行字说清，超过两行就拆或下沉到备注。</li>
+        <li><strong>一数</strong>——给每张 slide 一个数（编号、百分比、年份），方便回指"前面第几页"。</li>
+        <li><strong>一引</strong>——出现的引用、数据、案例，必有出处链接或机构名。</li>
+        <li><strong>一停</strong>——slide 之间留明显空白或细分隔线，不要链式堆叠。</li>
+      </ol>
+      <blockquote>
+        <p>幻灯是断奏不是连奏。听众每次抬眼都要"重新找到调子"，这是节奏服务的对象。</p>
+      </blockquote>
+    </section>
+
+    <!-- ============  07 一页例子 ============ -->
+    <section id="example">
+      <h2><span class="num">07</span>一页例子</h2>
+      <p>这是 frontend-slides 写出的某张 slide 的实际 HTML 结构：</p>
+<pre><code>&lt;section class="slide"&gt;
+  &lt;span class="num"&gt;03 / 12&lt;/span&gt;
+  &lt;h1&gt;一屏一题是节奏的根&lt;/h1&gt;
+  &lt;p&gt;长稿必须被切碎——剩下的文字下沉到备注，&lt;br&gt;不能任由作者堆砌。&lt;/p&gt;
+  &lt;cite&gt;——内部约定，2026-10&lt;/cite&gt;
+&lt;/section&gt;</code></pre>
+      <p>配上一段最小 CSS，一屏就成型：</p>
+<pre><code>.slide {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  padding: 12vh 8vw;
+  display: grid;
+  align-content: center;
+}
+.slide h1 { font: 600 72px/1.1 "Source Serif Pro", serif; }
+.slide .num {
+  position: fixed; right: 4vw; bottom: 4vh;
+  font: 11px/1 "SF Mono", monospace; color: #8a9099;
+}</code></pre>
+      <p>一份完整 deck 通常是 12–30 张这样的 <code>&lt;section class="slide"&gt;</code> 顺序排列，主件不到 30KB。</p>
+    </section>
+
+    <!-- ============  08 适用与不适用 ============ -->
+    <section id="scenes">
+      <h2><span class="num">08</span>适用与不适用</h2>
+      <p><strong>适用：</strong></p>
+      <ul>
+        <li>10–30 分钟的内部分享、读书会、组内汇报、家长会。</li>
+        <li>把一篇已写完的稿子或章节凝成"讲得动"的形式。</li>
+        <li>想用最轻的工具做投影片——双击 HTML 即放。</li>
+        <li>需要把讲稿存档、可分享链接、可打印发出去。</li>
+      </ul>
+      <p><strong>不适用：</strong></p>
+      <ul>
+        <li>需要复杂动画、视频嵌入、交互的场合。</li>
+        <li>演讲稿本身还没写出来——先把理解沉淀成稿，再来 frontend-slides。</li>
+        <li>公司强制模板（要 logo、要配色规范）——硬塞企业 VI 会别扭。</li>
+        <li>超 40 张的马拉松式汇报——节奏会塌，先拆成两场。</li>
+      </ul>
+    </section>
+
+    <!-- ============  09 三步开干 ============ -->
+    <section id="start">
+      <h2><span class="num">09</span>三步开干</h2>
+      <ol>
+        <li>选一份原始材料，贴在 <code>/frontend-slides</code> 后。可以是笔记、章节、大纲，甚至是一段录音链接。</li>
+        <li>看 agent 切出的页面大纲——可以合并、拆分、换顺序，它只是初稿，不是定论。</li>
+        <li>拿 <code>&lt;name&gt;-slides.html</code> 双击即可放映；浏览器全屏（<code>F11</code>）即投影；<code>Cmd/Ctrl + P</code> 可打印成讲义。</li>
+      </ol>
+      <blockquote>
+        <p>讲完之后 HTML 不要删——它就是这次分享的存档。</p>
+      </blockquote>
+      <p>改稿时直接说"第三页换成一句口号"，agent 就把那份 HTML 里编号为 03 的 <code>&lt;section&gt;</code> 整张替换掉。</p>
+    </section>
+
+    <!-- ============  页脚 ============ -->
+    <footer>
+      <span>e-show-skill · 固定风格 · 白底 · 单栏</span>
+      <span>frontend-slides · v3.0 · 2026-10-17</span>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  /* ============  滚动同步：当前章节高亮 ============ */
+  (function () {
+    const links = document.querySelectorAll('#toc a');
+    const map = new Map();
+    links.forEach(a => {
+      const id = a.getAttribute('href').slice(1);
+      const sec = document.getElementById(id);
+      if (sec) map.set(sec, a);
+    });
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          links.forEach(a => a.classList.remove('active'));
+          const a = map.get(e.target);
+          if (a) a.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+    map.forEach((_, sec) => io.observe(sec));
+  })();
+</script>
+</body>
+</html>
