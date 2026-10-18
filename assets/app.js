@@ -68,15 +68,9 @@
 
   function renderHome() {
     const main = el("main", { class: "container layer" });
-    const hero = el("section", { class: "hero fade-up" }, [
-      el("p", { class: "hero__eyebrow" }, "Personal workspace · 2026"),
-      el("h1", { class: "hero__title", html: "一张安静的书桌，放得下<em>写得慢的文章</em>与<em>翻得勤的小工具</em>。" }),
-      el("p", { class: "hero__lede" }, "e-workspace 是 jeekeagle 的个人网络角落。博客记录思考，Resources 收纳速查，所有东西都托管在 GitHub Pages 上，没有后台。"),
-      el("div", { class: "hero__meta" }, [
-        el("div", {}, [el("b", {}, "栈"), " · ", "HTML · CSS · 原生 JS"]),
-        el("div", {}, [el("b", {}, "托管"), " · ", "GitHub Pages"]),
-        el("div", {}, [el("b", {}, "更新"), " · ", "有想法就写"]),
-      ]),
+    const hero = el("section", { class: "hero hero--compact fade-up" }, [
+      el("h1", { class: "hero__title" }, "安静的思考角落。"),
+      el("p", { class: "hero__lede" }, "Jeek 的 个人网站。"),
     ]);
     main.append(hero);
 
